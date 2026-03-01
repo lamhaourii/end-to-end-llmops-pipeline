@@ -1,0 +1,12 @@
+paths: # i use only one dataset
+  hf_path: "azzedine/Goud-sum_v2"
+  local_dir: "data/raw/goud_sum_v2"
+  processed_dir: "data/processed"
+  cleaned_dataset: "data/processed/cleaned_dataset"
+  formatted_data: "formatted_data.jsonl"
+
+split:
+  seed: 42
+  train_ratio: 0.9
+  val_ratio: 0.05
+  test_ratio: 0.05

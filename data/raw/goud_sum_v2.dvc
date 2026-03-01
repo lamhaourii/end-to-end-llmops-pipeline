@@ -1,0 +1,6 @@
+outs:
+- md5: 054ef59936262c6f5325c4c9fd458d79.dir
+  size: 436589843
+  nfiles: 10
+  hash: md5
+  path: goud_sum_v2

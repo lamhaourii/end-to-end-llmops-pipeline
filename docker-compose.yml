@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  mlflow_server:
+    image: ghcr.io/mlflow/mlflow:v2.11.3
+    container_name: mlflow_tracker
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./mlflow/mlruns:/mlflow/artifacts
+      - ./mlflow/database:/mlflow/db
+    environment:
+      - BACKEND_STORE_URI=sqlite:////mlflow/db/mlflow.db
+      - DEFAULT_ARTIFACT_ROOT=/mlflow/artifacts
+    command: >
+      mlflow server 
+      --backend-store-uri sqlite:////mlflow/db/mlflow.db
+      --default-artifact-root /mlflow/artifacts
+      --host 0.0.0.0
+      --port 5000
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
