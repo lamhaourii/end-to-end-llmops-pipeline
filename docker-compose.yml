@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   mlflow_server:
-    image: ghcr.io/mlflow/mlflow:v2.11.3
+    image: ghcr.io/mlflow/mlflow:v3.9.0
     container_name: mlflow_tracker
     ports:
       - "5000:5000"

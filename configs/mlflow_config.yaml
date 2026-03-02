@@ -1,0 +1,5 @@
+tracking_uri: "http://localhost:5000"
+
+experiment: "darija-finetuning"
+  
+model_registry: "darija-sum"

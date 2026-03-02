@@ -8,3 +8,5 @@ data/processed/*
 __pycache__
 !data/**/*.dvc
 !data/**/.gitignore
+outputs/phase1/
+unsloth_compiled_cache/
