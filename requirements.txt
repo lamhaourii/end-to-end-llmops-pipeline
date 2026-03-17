@@ -1,7 +1,8 @@
 #torch==2.4.0
 torch==2.5.1
 #transformers==4.44.2
-transformers==4.51.3
+#transformers==4.51.3
+transformers==5.2.0
 #accelerate==0.34.2
 accelerate==1.12.0
 #bitsandbytes==0.43.3
@@ -11,11 +12,14 @@ peft==0.18.1
 #tokenizers==0.19.1
 #tokenizers==0.22.2
 
-pandas==2.2.2
+#pandas==2.2.2
+pandas==2.3.3
 #datasets==2.21.0
-datasets==4.3.0
+#datasets==4.3.0 in eval didnt work
+datasets==4.6.1
+evaluate==0.4.6
 rouge-score==0.1.2
-evaluate==0.4.2
+#evaluate==0.4.2
 
 #mlflow==2.16.0
 mlflow==3.9.0
@@ -23,7 +27,12 @@ dvc==3.55.2
 dvc-gdrive==3.0.1
 fastapi==0.112.2
 uvicorn==0.30.6
-#vllm==0.5.5
+vllm==0.6.5
 #trl==0.9.6
-trl==0.15.2
+trl==0.18.2
+huggingface-hub==1.5.0
 #unsloth==2026.2.1
+
+google-generativeai==0.8.6
+google-genai==1.65.0
+pytest==9.0.2

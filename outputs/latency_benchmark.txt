@@ -1,0 +1,45 @@
+Benchmark Run: 2026-03-15T23:49:53.207002
+Hardware: RTX 2060 6GB
+Model: darija-llm
+Requests: 100
+
+=== SEQUENTIAL BENCHMARK ===
+sequential/n_requests: 100
+sequential/n_successful: 100
+sequential/n_failed: 0
+sequential/ttft_mean_ms: 104.31
+sequential/ttft_median_ms: 80.43
+sequential/ttft_p95_ms: 184.31
+sequential/ttft_p99_ms: 266.71
+sequential/ttft_min_ms: 73.04
+sequential/ttft_max_ms: 266.71
+sequential/total_time_mean_ms: 928.12
+sequential/throughput_mean_tps: 46.82
+sequential/throughput_max_tps: 71.35
+
+=== CONCURRENT BENCHMARK ===
+concurrent/n_requests: 20
+concurrent/n_successful: 20
+concurrent/n_failed: 0
+concurrent/ttft_mean_ms: 145.35
+concurrent/ttft_median_ms: 92.92
+concurrent/ttft_p95_ms: 308.49
+concurrent/ttft_p99_ms: 308.49
+concurrent/ttft_min_ms: 73.33
+concurrent/ttft_max_ms: 308.49
+concurrent/total_time_mean_ms: 1405.92
+concurrent/throughput_mean_tps: 31.58
+concurrent/throughput_max_tps: 58.47
+
+=== DIAGNOSIS ===
+
+TTFT 104.3ms exceeds 100.0ms target.
+
+Diagnosis for RTX 2060 (6GB VRAM):
+
+MODERATE: TTFT 100-200ms on RTX 2060 is expected.
+The RTX 2060 has 6GB VRAM and 336 GB/s memory bandwidth.
+For comparison, an A100 has 2TB/s — 6x faster.
+The <100ms target was designed for datacenter GPUs.
+On consumer hardware, 100-200ms TTFT is the realistic floor.
+This is a hardware limitation, not a software issue.

@@ -11,16 +11,75 @@ services:
       - ./mlflow/database:/mlflow/db
     environment:
       - BACKEND_STORE_URI=sqlite:////mlflow/db/mlflow.db
-      - DEFAULT_ARTIFACT_ROOT=/mlflow/artifacts
+      - DEFAULT_ARTIFACT_ROOT=mlflow-artifacts:/
     command: >
       mlflow server 
       --backend-store-uri sqlite:////mlflow/db/mlflow.db
       --default-artifact-root /mlflow/artifacts
       --host 0.0.0.0
       --port 5000
+      --serve-artifacts
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
       interval: 30s
       timeout: 10s
       retries: 3
+    restart: unless-stopped
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: darija-api
+    ports:
+      - "8000:8000"   
+      - "8080:8080"   
+    environment:
+      - MODEL_PATH=/models/merged_model
+      - VLLM_HOST=0.0.0.0
+      - VLLM_PORT=8000
+      - API_HOST=0.0.0.0
+      - API_PORT=8080
+    volumes:
+      - ./outputs/phase1/merged_model:/models/merged_model:ro
+      - ./configs:/app/configs:ro
+      - ./outputs:/app/outputs
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 15s
+      retries: 5
+      start_period: 120s   
+    depends_on:
+      mlflow:
+        condition: service_healthy
+    restart: unless-stopped
+
+  gradio:
+    build:
+      context: .
+      dockerfile: Dockerfile.gradio    
+    container_name: darija-gradio
+    ports:
+      - "7860:7860"
+    environment:
+      - API_URL=http://api:8080        
+    volumes:
+      - ./src:/app/src:ro
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:7860"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    depends_on:
+      api:
+        condition: service_healthy
     restart: unless-stopped

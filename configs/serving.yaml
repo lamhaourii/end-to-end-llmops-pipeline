@@ -1,0 +1,17 @@
+output:
+  dir: "outputs/phase1"       
+
+vllm:
+  host: "0.0.0.0"
+  port: 8000
+  served_model_name: "darija-llm"    
+  dtype: "float16"
+  gpu_memory_utilization: 0.85       
+  max_model_len: 512                 
+  max_num_seqs: 4                   
+  max_num_batched_tokens: 2048     
+
+api:
+  version: "1.0.0"
+  host: "0.0.0.0"
+  port: 8080 

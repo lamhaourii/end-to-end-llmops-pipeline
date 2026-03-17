@@ -10,3 +10,16 @@ __pycache__
 !data/**/.gitignore
 outputs/phase1/
 unsloth_compiled_cache/
+notebooks/
+*.log
+logs/
+outputs/train.log
+.docker/
+~/.cache/huggingface/
+.cache/
+mlruns/
+mlflow/
+mlflow.db
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
